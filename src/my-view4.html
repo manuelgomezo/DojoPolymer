@@ -1,0 +1,89 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view4">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    section {
+        position: relative;
+        padding: 10em ;
+        background: #333;
+        color: #fff;
+        text-align: center;
+        border-bottom:1px solid #fff;
+      }
+
+      section h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 2.8em;
+        font-weight: 400;
+      }
+
+      section p {
+        font-size: 1.3em;
+        line-height: 1.5;
+      }
+      /* Triangles */
+        .ss-style-triangles::before,
+        .ss-style-triangles::after {
+          left: 50%;
+          width: 100px;
+          height: 100px;
+          -webkit-transform: translateX(-50%) rotate(45deg);
+          transform: translateX(-50%) rotate(45deg);
+        }
+
+        .ss-style-triangles::before {
+          top: -50px;
+          background: #fff;
+        }
+
+        .ss-style-triangles::after {
+          bottom: -50px;
+          z-index: 10;
+          background: inherit;
+        }
+
+    </style>
+
+    <div class="card">
+      <div class="circle">4</div>
+      <h1>View Four</h1>
+      <p>
+      <iron-ajax url="https://jsonplaceholder.typicode.com/posts" last-response="{{data}}" auto></iron-ajax>
+      <template is="dom-repeat" items="{{data}}">
+        <section class="ss-style-triangles">
+          <h2 class="titulo">{{item.title}}"</h2>
+          <div class="contenido">
+            {{item.body}}
+          </div>
+        </section>
+      </template>
+      </p>
+    </div>
+  </template>
+
+  <script>
+    class MyView4 extends Polymer.Element {
+      static get is() { return 'my-view4'; }
+    }
+
+    window.customElements.define(MyView4.is, MyView4);
+  </script>
+</dom-module>
